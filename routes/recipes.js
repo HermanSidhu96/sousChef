@@ -61,10 +61,10 @@ router.post('/add', function (req, res) {
 })
 
 router.get("/:id", async function (req, res) {
-    let html = "" 
+    let html = ""
     let stuff_from_database = await recipesModel.findById(req.params.id)
     html += stuff_from_database.name + "<br><br>"
-    stuff_from_database.ingredients.forEach(function(element) {
+    stuff_from_database.ingredients.forEach(function (element) {
         html += element.ingredient + "<br>"
     })
     html += "<br>"
@@ -72,20 +72,20 @@ router.get("/:id", async function (req, res) {
     html += "<form action='/recipes/addingredient' method='POST'>"
     html += "<input name='ingredient_name' placeholder='ingredient(s)'>"
     html += "<input name='id' type='hidden' value=" + req.params.id + ">"
-    html += "<button>add ingredient</button>"
+    html += "<button 'style= color: white; background-color= tomato;'>add ingredient</button>"
     html += "</form>"
     res.send(html)
 })
 
-router.post('/addingredient', async function(req,res) {
+router.post('/addingredient', async function (req, res) {
     console.log(req.body.ingredient_name)
     console.log(req.body.id)
     let row_in_recipes_table = await recipesModel.findById(req.body.id)
-        let ingredients_obj = {
-            ingredient: req.body.ingredient_name
-        }
-        row_in_recipes_table.ingredients.push(ingredients_obj) // put "beef patty" in ingredients[] array for "burger" or example
-        let save = await row_in_recipes_table.save()
+    let ingredients_obj = {
+        ingredient: req.body.ingredient_name
+    }
+    row_in_recipes_table.ingredients.push(ingredients_obj) // put "beef patty" in ingredients[] array for "burger" or example
+    let save = await row_in_recipes_table.save()
     res.send("thank you for submitting the ingredient")
 })
 
@@ -107,6 +107,13 @@ router.post("/add_recipe_form", async function (req, res) {
 
     res.send("thank you for adding recipe")
 });
+
+router.post('/search', async function (req, res) {
+        let requestedRecipe = await recipesModel.find({ name: req.body.recipe_find })
+        console.log(req.body.recipe_find)
+        console.log(requestedRecipe)
+        res.render('requestedrecipe.ejs', {requestedRecipe})
+})
 
 module.exports = router;
 

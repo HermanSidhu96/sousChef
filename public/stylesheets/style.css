@@ -6,3 +6,33 @@ body {
 a {
   color: #00B7FF;
 }
+
+#find_recipe  {
+  color: white;
+  background-color: tomato;
+}
+
+#add_recipe  {
+  color: white;
+  background-color: tomato;
+}
+
+#add_ingredient  {
+  color: white;
+  background-color: tomato;
+}
+
+#homepage {
+  text-align: center;
+  color: white;
+  background-image: url(https://i.imgur.com/PUq5eyj.jpg);
+  background-size: cover;
+}
+
+#reqrecipe {
+  text-align: center;
+  color: white;
+  background-image: url(https://www.oberlin.edu/sites/default/files/styles/width_760/public/content/event/image/4f8e5416d16b52307223f3414b4bf3e196a445ef.jpg);
+  background-size: cover;
+}
+

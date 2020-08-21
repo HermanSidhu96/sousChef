@@ -4,8 +4,12 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+  <body id= "homepage">
+    <h1><span style='font-size:40px;'>&#x1f373;</span><%= title %></h1>
+    <p>The assistant chef readily available on your fingertips</p>
+    <form action="/recipes/search" method="POST">
+      <input name="recipe_find" placeholder="enter ingredent(s)/dish name">
+      <button id= "find_recipe">Find recipe</button>
+  </form>
   </body>
 </html>
