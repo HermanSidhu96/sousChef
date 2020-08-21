@@ -27,17 +27,7 @@ router.get("/", async function (req, res) {
     console.log('route is beign hit')
     try { //recipesmodel.find finds everything in the recipes table 
         let myrecipes = await recipesModel.find({});
-        console.log(myrecipes);
-        let html = ""
-        myrecipes.forEach(function (db_item) {
-            console.log(db_item)
-            html += "~~Name: " + db_item.name + "~~<br>"
-            // html += "<img style='width:100px' src='" + db_item.image_url + "'>"
-            html += "<br>"
-            html += "<a href='/recipes/" + db_item._id + "'>Details</a><br><br>"
-        })
-        res.send(html)
-        res.send("heres a list of all the recipes" + myrecipes)
+        res.render('list.ejs', {myrecipes:myrecipes})
     } catch (error) {
         console.log("error=" + error)
         res.send('there was an error')
@@ -61,20 +51,8 @@ router.post('/add', function (req, res) {
 })
 
 router.get("/:id", async function (req, res) {
-    let html = ""
     let stuff_from_database = await recipesModel.findById(req.params.id)
-    html += stuff_from_database.name + "<br><br>"
-    stuff_from_database.ingredients.forEach(function (element) {
-        html += element.ingredient + "<br>"
-    })
-    html += "<br>"
-    html += "add an ingredient below:<br><br>"
-    html += "<form action='/recipes/addingredient' method='POST'>"
-    html += "<input name='ingredient_name' placeholder='ingredient(s)'>"
-    html += "<input name='id' type='hidden' value=" + req.params.id + ">"
-    html += "<button 'style= color: white; background-color= tomato;'>add ingredient</button>"
-    html += "</form>"
-    res.send(html)
+    res.render('details.ejs', {stuff_from_database:stuff_from_database})
 })
 
 router.post('/addingredient', async function (req, res) {
@@ -109,7 +87,7 @@ router.post("/add_recipe_form", async function (req, res) {
 });
 
 router.post('/search', async function (req, res) {
-        let requestedRecipe = await recipesModel.find({ name: req.body.recipe_find })
+        let requestedRecipe = await recipesModel.findOne({ name: req.body.recipe_find })
         console.log(req.body.recipe_find)
         console.log(requestedRecipe)
         res.render('requestedrecipe.ejs', {requestedRecipe})

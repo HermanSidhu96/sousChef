@@ -1,0 +1,16 @@
+<html>
+    <body id= "detailpage">
+
+        <%=stuff_from_database.name%>  <br><br>
+        <%stuff_from_database.ingredients.forEach(function (element) {%>
+            <%=element.ingredient%> <br>
+        <%})%>
+        <br>
+        <p>add an ingredient below:</p><br><br>
+        <form action='/recipes/addingredient' method='POST'>
+        <input name='ingredient_name' placeholder='ingredient(s)'>
+        <input name='id' type='hidden' value=<%=stuff_from_database._id%>>
+        <button>add ingredient</button>
+        </form>
+    </body>
+</html>

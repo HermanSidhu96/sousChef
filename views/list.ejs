@@ -1,0 +1,9 @@
+<html>
+    <body>
+        <%myrecipes.forEach(function (db_item) {%>
+        ~~Name: <%=db_item.name%> ~~ 
+        <a href='/recipes/<%=db_item._id%>'>Details</a><br><br>
+        <%})%><br>
+        <br>
+    </body>
+</html>

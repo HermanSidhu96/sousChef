@@ -1,6 +1,9 @@
 <html>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   <body id= "reqrecipe">
-    <h1><%= requestedRecipe %></h1>
+    <h1><%= requestedRecipe.name %></h1>
+    <%requestedRecipe.ingredients.forEach(function (element) {%>
+        <%=element.ingredient%> <br>
+    <%})%>
   </body>
 </html>
